@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Your Dream Outfit</title>
     <style>
-        /* Default Light Mode */
+        /* Thay đổi ở đây: Dùng min-height thay cho height, và overflow-y: auto */
         body {
             font-family: Arial, sans-serif;
             background-color: #f3e5f5; /* Light lavender background */
@@ -13,9 +13,9 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            /* align-items: center;  // Bỏ nếu không muốn canh giữa theo chiều dọc */
+            min-height: 100vh; /* Cho phép chiều cao trang tùy thuộc nội dung */
+            overflow-y: auto;  /* Tạo thanh cuộn dọc */
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -36,6 +36,9 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             transition: background-color 0.3s, box-shadow 0.3s;
+
+            /* Thêm margin-top để đẩy container xuống thấp hơn */
+            margin-top: 20px; 
         }
 
         .container.dark-mode {
@@ -122,6 +125,15 @@
             opacity: 1;
         }
 
+        /* Phần chào nằm trên hộp chat */
+        .chat-intro {
+            font-size: 20px;
+            color: #b211ce;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
         .chat-box {
             margin-top: 20px;
             padding: 15px;
@@ -194,6 +206,7 @@
                 align-items: center;
                 width: 100%;
                 padding: 15px;
+                margin-top: 10px; /* Giảm nếu màn hình nhỏ */
             }
 
             .left-panel, .right-panel {
@@ -261,6 +274,11 @@
 
         <!-- Right Panel: Chat Section -->
         <div class="right-panel">
+            <!-- Phần giới thiệu ngay trên hộp chat -->
+            <div class="chat-intro">
+                Hello! Ready to design your dream look?
+            </div>
+
             <div id="chat" class="chat-box">
                 <p><strong>Dizim:</strong> Hello! Ready to design your dream look? Simply upload your body or clothing images! 📷</p>
                 <p><strong>Dizim:</strong> Tell me about your preferences: casual, creative, youthful, dark tones, and more. Also, where are you headed, and what's the occasion? 👠</p>
@@ -303,7 +321,7 @@
             }
         }
 
-        // Function to send message to backend
+        // Function to send message to backend (giả lập)
         function sendMessageToBackend(message) {
             const bodyFile = document.getElementById('body-upload').files[0];
             const clothesFile = document.getElementById('clothes-upload').files[0];
