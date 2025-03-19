@@ -49,16 +49,17 @@
         }
 
         h2 {
-            color: #9c27b0; /* Light purple */
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: bold;
+            color: #b211ce; /* Light purple */
+            font-size: 36px; /* Tăng kích thước chữ để nổi bật */
+            font-weight: 700; /* Đậm chữ */
             text-align: center;
-            transition: color 0.3s;
+            padding-left: 20px; /* Thêm khoảng cách từ bên trái */
+            text-transform: uppercase; /* Chữ in hoa để tạo sự ấn tượng */
         }
 
-        .container.dark-mode h2 {
-            color: #ba68c8; /* Lighter purple in Dark Mode */
+        h2:hover {
+            transform: scale(1.1); /* Phóng to chữ khi hover */
+            color: #ba68c8; /* Màu sáng hơn khi hover */
         }
 
         .upload-section {
