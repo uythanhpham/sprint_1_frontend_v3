@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Dream Outfit</title>
+    <style>
+        /* Default Light Mode */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5f5; /* Light lavender background */
+            color: #4a148c; /* Dark purple text */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #212121; /* Dark background */
+            color: #ffffff; /* White text */
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px;
+            background-color: #ffffff; /* White background */
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .container.dark-mode {
+            background-color: #333333; /* Dark background for container */
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1); /* Lighter shadow */
+        }
+
+        .left-panel, .right-panel {
+            width: 48%;
+            position: relative;
+        }
+
+        h2 {
+            color: #9c27b0; /* Light purple */
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        .container.dark-mode h2 {
+            color: #ba68c8; /* Lighter purple in Dark Mode */
+        }
+
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .upload-section div {
+            width: 100%;
+        }
+
+        .upload-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #9c27b0; /* Light purple */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .upload-button:hover {
+            background-color: #7b1fa2; /* Darker purple */
+            transform: scale(1.05);
+        }
+
+        .upload-button:active {
+            transform: scale(0.98);
+        }
+
+        .image-preview {
+            margin-top: 10px;
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3e5f5;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 6px;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-preview:hover img {
+            opacity: 1;
+        }
+
+        .chat-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: auto;
+            background-color: #f3e5f5;
+            text-align: left;
+            box-sizing: border-box;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .container.dark-mode .chat-box {
+            background-color: #424242; /* Dark background for chat box */
+        }
+
+        .chat-box p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .chat-box strong {
+            color: #9c27b0; /* Light purple */
+        }
+
+        .message-input {
+            width: calc(100% - 100px);
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s;
+        }
+
+        .message-input:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(156, 39, 176, 0.5);
+        }
+
+        .send-button {
+            width: 90px;
+            background-color: #9c27b0; /* Light purple */
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .send-button:hover {
+            background-color: #7b1fa2; /* Darker purple */
+            transform: scale(1.05);
+        }
+
+        .send-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Small devices (mobile) */
+        @media screen and (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 15px;
+            }
+
+            .left-panel, .right-panel {
+                width: 100%;
+            }
+
+            .message-input {
+                width: calc(100% - 80px);
+            }
+
+            .send-button {
+                width: 80px;
+            }
+        }
+
+        /* Add some spacing between elements */
+        .container > *:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        /* Button for toggling dark mode */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #9c27b0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #7b1fa2;
+            transform: scale(1.05);
+        }
+
+        .dark-mode-toggle:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel: Upload Section -->
+        <div class="left-panel">
+            <h2>Create Your Dream Outfit</h2>
+            <div class="upload-section">
+                <div>
+                    <label for="body-upload">Upload Body:</label>
+                    <input type="file" id="body-upload" class="upload-button" onchange="previewImage('body-upload', 'body-preview')">
+                    <div id="body-preview" class="image-preview">No image uploaded</div>
+                </div>
+                <div>
+                    <label for="clothes-upload">Upload Clothes:</label>
+                    <input type="file" id="clothes-upload" class="upload-button" onchange="previewImage('clothes-upload', 'clothes-preview')">
+                    <div id="clothes-preview" class="image-preview">No image uploaded</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Chat Section -->
+        <div class="right-panel">
+            <div id="chat" class="chat-box">
+                <p><strong>Dizim:</strong> Hello! Ready to design your dream look? Simply upload your body or clothing images! 📷</p>
+                <p><strong>Dizim:</strong> Tell me about your preferences: casual, creative, youthful, dark tones, and more. Also, where are you headed, and what's the occasion? 👠</p>
+            </div>
+            <div>
+                <input type="text" id="message-input" class="message-input" placeholder="Bring it on🔥 ...">
+                <button id="send-btn" class="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <script>
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('.container').classList.toggle('dark-mode');
+            document.querySelectorAll('.upload-button').forEach(button => button.classList.toggle('dark-mode'));
+            document.querySelectorAll('.message-input').forEach(input => input.classList.toggle('dark-mode'));
+            document.querySelectorAll('.send-button').forEach(button => button.classList.toggle('dark-mode'));
+        }
+
+        // Function to preview uploaded image
+        function previewImage(inputId, previewId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.innerHTML = `<img src="${reader.result}" alt="Preview">`;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);  // Convert image to base64 URL for preview
+            } else {
+                preview.innerHTML = 'No image uploaded';  // Default text if no file is chosen
+            }
+        }
+
+        // Function to send message to backend
+        function sendMessageToBackend(message) {
+            const bodyFile = document.getElementById('body-upload').files[0];
+            const clothesFile = document.getElementById('clothes-upload').files[0];
+            if (!bodyFile && !clothesFile) {
+                alert('You need to upload body or clothes photos.');
+                return;
+            }
+
+            // Prepare data to send to backend
+            const formData = new FormData();
+            formData.append("message", message);
+            if (bodyFile) {
+                formData.append("body", bodyFile);
+            }
+            if (clothesFile) {
+                formData.append("clothes", clothesFile);
+            }
+
+            // Simulate sending request to backend
+            fetch('/api/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatBox = document.getElementById('chat');
+                chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the latest message
+            })
+            .catch(error => {
+                const chatBox = document.getElementById('chat');
+                chatBox.innerHTML += `<p><strong>Error:</strong> Không thể gửi yêu cầu. Vui lòng thử lại.</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+        }
+
+        // Handle send button click
+        document.getElementById('send-btn').addEventListener('click', function() {
+            const message = document.getElementById('message-input').value;
+            if (message.trim() === '') {
+                alert('Please tell Dizim about your fashion style.');
+                return;
+            }
+            // Add user message to chat
+            const chatBox = document.getElementById('chat');
+            chatBox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+            document.getElementById('message-input').value = '';  // Clear input field
+            chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the latest message
+
+            // Send message to backend
+            sendMessageToBackend(message);
+        });
+
+        // Allow enter key to send message
+        document.getElementById('message-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('send-btn').click();
+            }
+        });
+    </script>
+</body>
+</html>
