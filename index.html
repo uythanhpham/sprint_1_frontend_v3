@@ -5,24 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Your Dream Outfit</title>
     <style>
-        /* Thay đổi ở đây: Dùng min-height thay cho height, và overflow-y: auto */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f3e5f5; /* Light lavender background */
-            color: #4a148c; /* Dark purple text */
+            background-color: #f3e5f5;
+            color: #4a148c;
             margin: 0;
             display: flex;
             justify-content: center;
-            /* align-items: center;  // Bỏ nếu không muốn canh giữa theo chiều dọc */
-            min-height: 100vh; /* Cho phép chiều cao trang tùy thuộc nội dung */
-            overflow-y: auto;  /* Tạo thanh cuộn dọc */
+            min-height: 100vh;
+            overflow-y: auto;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Dark Mode */
         body.dark-mode {
-            background-color: #212121; /* Dark background */
-            color: #ffffff; /* White text */
+            background-color: #212121;
+            color: #ffffff;
         }
 
         .container {
@@ -31,19 +28,16 @@
             width: 100%;
             max-width: 1200px;
             padding: 30px;
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: background-color 0.3s, box-shadow 0.3s;
-
-            /* Thêm margin-top để đẩy container xuống thấp hơn */
-            margin-top: 20px; 
+            margin-top: 20px;
         }
 
         .container.dark-mode {
-            background-color: #333333; /* Dark background for container */
-            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1); /* Lighter shadow */
+            background-color: #333333;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
         }
 
         .left-panel, .right-panel {
@@ -52,17 +46,17 @@
         }
 
         h2 {
-            color: #b211ce; /* Light purple */
-            font-size: 36px; /* Tăng kích thước chữ để nổi bật */
-            font-weight: 700; /* Đậm chữ */
+            color: #b211ce;
+            font-size: 36px;
+            font-weight: 700;
             text-align: center;
-            padding-left: 20px; /* Thêm khoảng cách từ bên trái */
-            text-transform: uppercase; /* Chữ in hoa để tạo sự ấn tượng */
+            padding-left: 20px;
+            text-transform: uppercase;
         }
 
         h2:hover {
-            transform: scale(1.1); /* Phóng to chữ khi hover */
-            color: #ba68c8; /* Màu sáng hơn khi hover */
+            transform: scale(1.1);
+            color: #ba68c8;
         }
 
         .upload-section {
@@ -79,7 +73,7 @@
         .upload-button {
             width: 100%;
             padding: 12px;
-            background-color: #9c27b0; /* Light purple */
+            background-color: #9c27b0;
             color: white;
             border: none;
             border-radius: 6px;
@@ -90,7 +84,7 @@
         }
 
         .upload-button:hover {
-            background-color: #7b1fa2; /* Darker purple */
+            background-color: #7b1fa2;
             transform: scale(1.05);
         }
 
@@ -125,31 +119,34 @@
             opacity: 1;
         }
 
-        /* Phần chào nằm trên hộp chat */
         .chat-intro {
             font-size: 20px;
             color: #b211ce;
             font-weight: 600;
             text-align: center;
-            margin-bottom: 10px;
+            margin-top: 79px;
+            margin-bottom: -78px;
         }
 
         .chat-box {
-            margin-top: 20px;
+            margin-top: 95px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            height: 300px;
+            height: 500px;
             overflow-y: auto;
             background-color: #f3e5f5;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             box-sizing: border-box;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
         }
 
         .container.dark-mode .chat-box {
-            background-color: #424242; /* Dark background for chat box */
+            background-color: #424242;
         }
 
         .chat-box p {
@@ -158,7 +155,7 @@
         }
 
         .chat-box strong {
-            color: #9c27b0; /* Light purple */
+            color: #9c27b0;
         }
 
         .message-input {
@@ -179,7 +176,7 @@
 
         .send-button {
             width: 90px;
-            background-color: #9c27b0; /* Light purple */
+            background-color: #9c27b0;
             color: white;
             border: none;
             padding: 12px;
@@ -191,7 +188,7 @@
         }
 
         .send-button:hover {
-            background-color: #7b1fa2; /* Darker purple */
+            background-color: #7b1fa2;
             transform: scale(1.05);
         }
 
@@ -206,7 +203,7 @@
                 align-items: center;
                 width: 100%;
                 padding: 15px;
-                margin-top: 10px; /* Giảm nếu màn hình nhỏ */
+                margin-top: 10px;
             }
 
             .left-panel, .right-panel {
@@ -220,11 +217,6 @@
             .send-button {
                 width: 80px;
             }
-        }
-
-        /* Add some spacing between elements */
-        .container > *:not(:last-child) {
-            margin-bottom: 20px;
         }
 
         /* Button for toggling dark mode */
@@ -251,11 +243,38 @@
         .dark-mode-toggle:active {
             transform: scale(0.98);
         }
+
+        /* Tin nhắn của người dùng (Client) */
+        .user-message {
+            background-color: #cb54e0;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            max-width: 85%;
+            margin: 12px 0;
+            align-self: flex-end;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            word-wrap: break-word;
+            font-size: 16px;
+            text-align: right;
+        }
+
+        /* Tin nhắn của bot (Dizim) */
+        .bot-message {
+            background-color: #f3e5f5;
+            color: #4a148c;
+            padding: 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            margin: 10px 0;
+            align-self: flex-start;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Left Panel: Upload Section -->
         <div class="left-panel">
             <h2>Create Your Dream Outfit</h2>
             <div class="upload-section">
@@ -272,15 +291,11 @@
             </div>
         </div>
 
-        <!-- Right Panel: Chat Section -->
         <div class="right-panel">
-            <!-- Phần giới thiệu ngay trên hộp chat -->
-            <div class="chat-intro">
-                Ready to design your dream look?
-            </div>
+            <div class="chat-intro">Ready to design your dream look?</div>
 
             <div id="chat" class="chat-box">
-                <p><strong>Dizim:</strong> Hello! Tell me about your preferences: casual, creative, youthful, dark tones, and more. Also, where are you headed, and what's the occasion? 👠</p>
+                <p>Hello! Tell me about your preferences: casual, creative, youthful, dark tones, and more. Also, where are you headed, and what's the occasion? 👠</p>
             </div>
             <div>
                 <input type="text" id="message-input" class="message-input" placeholder="Bring it on🔥 ...">
@@ -289,11 +304,9 @@
         </div>
     </div>
 
-    <!-- Dark Mode Toggle Button -->
     <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
 
     <script>
-        // Function to toggle dark mode
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             document.querySelector('.container').classList.toggle('dark-mode');
@@ -302,7 +315,6 @@
             document.querySelectorAll('.send-button').forEach(button => button.classList.toggle('dark-mode'));
         }
 
-        // Function to preview uploaded image
         function previewImage(inputId, previewId) {
             const input = document.getElementById(inputId);
             const preview = document.getElementById(previewId);
@@ -314,67 +326,24 @@
             };
 
             if (file) {
-                reader.readAsDataURL(file);  // Convert image to base64 URL for preview
+                reader.readAsDataURL(file);
             } else {
-                preview.innerHTML = 'No image uploaded';  // Default text if no file is chosen
+                preview.innerHTML = 'No image uploaded';
             }
         }
 
-        // Function to send message to backend (giả lập)
-        function sendMessageToBackend(message) {
-            const bodyFile = document.getElementById('body-upload').files[0];
-            const clothesFile = document.getElementById('clothes-upload').files[0];
-            if (!bodyFile && !clothesFile) {
-                alert('You need to upload body or clothes photos.');
-                return;
-            }
-
-            // Prepare data to send to backend
-            const formData = new FormData();
-            formData.append("message", message);
-            if (bodyFile) {
-                formData.append("body", bodyFile);
-            }
-            if (clothesFile) {
-                formData.append("clothes", clothesFile);
-            }
-
-            // Simulate sending request to backend
-            fetch('/api/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const chatBox = document.getElementById('chat');
-                chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
-                chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the latest message
-            })
-            .catch(error => {
-                const chatBox = document.getElementById('chat');
-                chatBox.innerHTML += `<p><strong>Error:</strong> Không thể gửi yêu cầu. Vui lòng thử lại.</p>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            });
-        }
-
-        // Handle send button click
         document.getElementById('send-btn').addEventListener('click', function() {
             const message = document.getElementById('message-input').value;
             if (message.trim() === '') {
                 alert('Please tell Dizim about your fashion style.');
                 return;
             }
-            // Add user message to chat
             const chatBox = document.getElementById('chat');
-            chatBox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
-            document.getElementById('message-input').value = '';  // Clear input field
-            chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the latest message
-
-            // Send message to backend
-            sendMessageToBackend(message);
+            chatBox.innerHTML += `<p class="user-message"> ${message}</p>`;
+            document.getElementById('message-input').value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
         });
 
-        // Allow enter key to send message
         document.getElementById('message-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 document.getElementById('send-btn').click();
@@ -383,3 +352,35 @@
     </script>
 </body>
 </html>
+<script>
+    document.getElementById('send-btn').addEventListener('click', function() {
+        const message = document.getElementById('message-input').value;
+        const bodyFile = document.getElementById('body-upload').files[0];  // Kiểm tra ảnh body
+        const clothesFile = document.getElementById('clothes-upload').files[0];  // Kiểm tra ảnh quần áo
+
+        // Kiểm tra nếu chưa tải ảnh lên
+        if (!bodyFile && !clothesFile) {
+            alert('You need to upload body or clothes photos.');
+            return;  // Dừng lại và không gửi tin nhắn nếu không tải ảnh lên
+        }
+
+        // Nếu tin nhắn trống
+        if (message.trim() === '') {
+            alert('Please tell Dizim about your fashion style.');
+            return; // Dừng lại nếu không có nội dung tin nhắn
+        }
+
+        // Nếu đã có ảnh và tin nhắn, tiếp tục gửi
+        const chatBox = document.getElementById('chat');
+        chatBox.innerHTML += `<p class="user-message">${message}</p>`;
+        document.getElementById('message-input').value = '';  // Xóa trường nhập liệu
+        chatBox.scrollTop = chatBox.scrollHeight;  // Cuộn đến tin nhắn mới nhất
+    });
+
+    // Cho phép gửi tin nhắn bằng phím "Enter"
+    document.getElementById('message-input').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            document.getElementById('send-btn').click();  // Gửi tin nhắn khi nhấn "Enter"
+        }
+    });
+</script>
